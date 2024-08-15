@@ -80,7 +80,6 @@ const LineGraphExample = ({ route }) => {
                     <Text style={styles.topTitle}>Graphs</Text>
                 </View>
                 <View style={styles.chartContainer}>
-                    <Text style={styles.chartTitle}>Sugar Concentration (mg/dL) and Insulin Intake (units)</Text>
                     <View style={styles.chartWrapper}>
                         <ScrollView horizontal contentContainerStyle={styles.chartScrollContainer}>
                             <View style={styles.chartInnerContainer}>
@@ -97,10 +96,10 @@ const LineGraphExample = ({ route }) => {
         ],
         legend: ["Sugar Concentration"]
     }}
-    width={Math.max(windowWidth - 40, labels.length * 40)}
-    height={windowHeight * 0.5}
+    width={Math.max(windowWidth - 40, labels.length * 50)}
+    height={windowHeight * 0.8}  // Increase the height to provide more vertical space
     yAxisSuffix=" mg/dL"
-    yAxisInterval={1}  // Ensuring every value is considered
+    yAxisInterval={1}  // Adjust this to control the number of labels
     fromZero={true}
     yAxisLabel=""
     chartConfig={{
@@ -128,11 +127,12 @@ const LineGraphExample = ({ route }) => {
             fontWeight: 'normal',
         },
     }}
-    yLabelsOffset={1}  // Adjust as needed to fit the labels
+    yLabelsOffset={10}  // Adjust to fit labels better
     bezier
-    segments={28}  // This will force the chart to display exactly 8 segments (0 to 700)
+    segments={14}  // Increase the number of segments
     style={styles.chart}
 />
+
                             </View>
                         </ScrollView>
                     </View>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     topContainer: {
         padding: 10,
         backgroundColor: '#603F83FF',
-        height: windowHeight * 0.13,
+        height: windowHeight * 0.10,
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: windowWidth * -0.03,
@@ -177,10 +177,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         fontWeight: 'bold',
-        marginVertical: 20,
     },
     chartContainer: {
-        marginVertical: 20,
+        marginTop:windowHeight *0.01,
     },
     chartWrapper: {
         flexDirection: 'row',
@@ -191,6 +190,7 @@ const styles = StyleSheet.create({
     },
     chartInnerContainer: {
         paddingHorizontal: 20,
+        marginTop:windowHeight *-0.01,
     },
     xAxisContainer: {
         marginTop: 10,
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
     },
     chart: {
         borderRadius: 10,
+        height:windowHeight*0.85,
     },
 });
 
