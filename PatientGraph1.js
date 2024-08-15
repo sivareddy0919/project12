@@ -32,7 +32,7 @@ const LineGraphExample = ({ route }) => {
                 }
 
                 const fetchedSugarConcentration = fetchedData.map(item => parseFloat(item.sugar_concentration));
-                const fetchedInsulinIntake = fetchedData.map(item => parseFloat(item.insulinintake));
+                const fetchedInsulinIntake = fetchedData.map(item => `${parseFloat(item.insulinintake)} units`);
 
                 const fetchedLabels = fetchedData.map(item => {
                     const date = new Date(item.datetime);
@@ -80,7 +80,6 @@ const LineGraphExample = ({ route }) => {
                     <Text style={styles.topTitle}>Graphs</Text>
                 </View>
                 <View style={styles.chartContainer}>
-                    
                     <View style={styles.chartWrapper}>
                         <View style={styles.yAxisContainer}>
                             {[700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100, 50, 0].map((value, index) => (
@@ -138,6 +137,20 @@ const LineGraphExample = ({ route }) => {
                                     bezier
                                     segments={14}  // Increase the number of segments
                                     style={styles.chart}
+                                    renderDotContent={({ x, y, index }) => (
+                                        <View
+                                            key={index}
+                                            style={{
+                                                position: 'absolute',
+                                                left: x - 5,  // Adjust to center the text
+                                                top: y - -65,  // Adjust to position above the dot
+                                            }}
+                                        >
+                                            <Text style={styles.dotLabel}>
+                                                {insulinIntake[index]}
+                                            </Text>
+                                        </View>
+                                    )}
                                 />
                             </View>
                         </ScrollView>
@@ -217,15 +230,17 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginRight: 14,  // Space between the chart and the labels
         paddingVertical: 0,
-        marginTop:windowHeight*0.031,
+        marginTop: windowHeight * 0.031,
     },
     yAxisLabel: {
         fontSize: 11,
         textAlign: 'center',
         marginVertical: 8.8,  // Space between each label
     },
-    chartInnerContainer: {
-        paddingHorizontal: 0,
+    dotLabel: {
+        fontSize: 10,
+        color: '#FFFFFF',
+        textAlign: 'center',
     },
 });
 
